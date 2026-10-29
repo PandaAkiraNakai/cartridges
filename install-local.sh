@@ -16,6 +16,10 @@ if [[ -d "$BUILD" ]]; then
 else
     meson setup "$BUILD" "$SRC" --prefix="$PREFIX" -Dprofile=release
 fi
+# The blueprint target outputs a whole directory, whose modification time
+# changes with every build, so Ninja doesn't notice when the .blp files change:
+# make them newer than it to always recompile them
+touch "$SRC"/cartridges/ui/*.blp
 meson install -C "$BUILD" --skip-subprojects
 glib-compile-schemas "$PREFIX/share/glib-2.0/schemas"
 
