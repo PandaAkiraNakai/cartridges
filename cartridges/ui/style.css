@@ -95,3 +95,58 @@
     }
   }
 }
+
+#store-summary {
+  font-size: 1.1em;
+}
+
+#store-carousel picture.store-screenshot {
+  border-radius: 12px;
+}
+
+#store-thumbnails > button {
+  padding: 0;
+  border-radius: 6px;
+  opacity: 0.55;
+  transition: opacity 200ms;
+}
+
+#store-thumbnails > button:hover,
+#store-thumbnails > button.selected {
+  opacity: 1;
+}
+
+#store-thumbnails > button.selected {
+  outline: 2px solid var(--view-fg-color);
+  outline-offset: 2px;
+}
+
+#store-thumbnails > button picture {
+  border-radius: 6px;
+}
+
+#store .store-tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgb(from var(--view-fg-color) r g b / 12%);
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+#store .store-tag.metacritic {
+  background: rgb(from var(--success-bg-color) r g b / 60%);
+}
+
+#achievements-progress trough,
+#achievements-progress progress {
+  min-height: 8px;
+  border-radius: 999px;
+}
+
+row.achievement .achievement-icon {
+  border-radius: 6px;
+}
+
+row.achievement.locked .achievement-icon {
+  opacity: 0.6;
+}
