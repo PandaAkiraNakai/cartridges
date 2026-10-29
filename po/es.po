@@ -1,0 +1,479 @@
+# Spanish translations for cartridges package.
+# Copyright (C) 2026 THE cartridges'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the cartridges package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cartridges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 23:06-0300\n"
+"PO-Revision-Date: 2026-10-28 23:06-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Translators: Replace "translator-credits" with your name/username,
+#. and optionally a URL or an email in <user@example.org> format.
+#: cartridges/application.py:44
+msgid "translator-credits"
+msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
+
+#: cartridges/sources/desktop.py:22
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: cartridges/sources/heroic.py:20
+msgid "Heroic"
+msgstr "Heroic"
+
+#: cartridges/sources/imported.py:16
+msgid "Added"
+msgstr "Añadido"
+
+#: cartridges/sources/steam.py:24
+msgid "Steam"
+msgstr "Steam"
+
+#: cartridges/ui/collection-details.blp:22 cartridges/ui/game-details.blp:214
+#: cartridges/ui/game-item.blp:59 cartridges/ui/window.blp:130
+msgid "New Collection"
+msgstr "Nueva colección"
+
+#: cartridges/ui/collection-details.blp:44 cartridges/ui/game-details.blp:412
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: cartridges/ui/collection-details.blp:51 cartridges/ui/game-details.blp:421
+msgid "Apply"
+msgstr "Aplicar"
+
+#: cartridges/ui/collection-details.blp:51 cartridges/ui/game-details.blp:421
+msgid "Add"
+msgstr "Añadir"
+
+#: cartridges/ui/collection-details.blp:62
+msgid "Name"
+msgstr "Nombre"
+
+#: cartridges/ui/collection-details.blp:87 cartridges/ui/game-details.blp:279
+#: cartridges/ui/game-item.blp:55 cartridges/ui/window.blp:123
+msgid "Remove"
+msgstr "Eliminar"
+
+#: cartridges/ui/collections.py:238 cartridges/ui/games.py:153
+#, python-brace-format
+msgid "{} removed"
+msgstr "{} eliminado"
+
+#: cartridges/ui/game-details.blp:29 cartridges/ui/shortcuts-dialog-mac.blp:38
+#: cartridges/ui/shortcuts-dialog.blp:38 cartridges/ui/window.blp:218
+msgid "Add Game"
+msgstr "Añadir juego"
+
+#: cartridges/ui/game-details.blp:150
+msgid "Last played: {}"
+msgstr "Último jugado: {}"
+
+#: cartridges/ui/game-details.blp:159
+msgid "Added: {}"
+msgstr "Añadido: {}"
+
+#: cartridges/ui/game-details.blp:166
+msgid "Playtime: {}"
+msgstr "Tiempo de juego: {}"
+
+#: cartridges/ui/game-details.blp:181 cartridges/ui/game-item.blp:101
+msgid "Play"
+msgstr "Jugar"
+
+#: cartridges/ui/game-details.blp:198 cartridges/ui/game-item.blp:41
+#: cartridges/ui/window.blp:122
+msgid "Edit"
+msgstr "Editar"
+
+#: cartridges/ui/game-details.blp:208 cartridges/ui/game-details.blp:229
+#: cartridges/ui/game-item.blp:75 cartridges/ui/shortcuts-dialog-mac.blp:54
+#: cartridges/ui/shortcuts-dialog.blp:54 cartridges/ui/window.blp:119
+msgid "Collections"
+msgstr "Colecciones"
+
+#: cartridges/ui/game-details.blp:256 cartridges/ui/game-item.blp:44
+msgid "Hide"
+msgstr "Ocultar"
+
+#: cartridges/ui/game-details.blp:268 cartridges/ui/game-item.blp:50
+msgid "Unhide"
+msgstr "Desocultar"
+
+#: cartridges/ui/game-details.blp:289 cartridges/ui/game-details.blp:294
+msgid "Search On"
+msgstr "Buscar en"
+
+#: cartridges/ui/game-details.blp:297
+msgid "HowLongToBeat"
+msgstr "HowLongToBeat"
+
+#: cartridges/ui/game-details.blp:303
+msgid "IGDB"
+msgstr "IGDB"
+
+#: cartridges/ui/game-details.blp:309
+msgid "Lutris"
+msgstr "Lutris"
+
+#: cartridges/ui/game-details.blp:315
+msgid "PCGamingWiki"
+msgstr "PCGamingWiki"
+
+#: cartridges/ui/game-details.blp:321
+msgid "ProtonDB"
+msgstr "ProtonDB"
+
+#: cartridges/ui/game-details.blp:327
+msgid "SteamGridDB"
+msgstr "SteamGridDB"
+
+#: cartridges/ui/game-details.blp:354
+msgid "Title"
+msgstr "Título"
+
+#: cartridges/ui/game-details.blp:360
+msgid "Developer (optional)"
+msgstr "Desarrollador (opcional)"
+
+#: cartridges/ui/game-details.blp:368
+msgid "Executable"
+msgstr "Ejecutable"
+
+#: cartridges/ui/game-details.blp:375
+msgid "More Info"
+msgstr "Más información"
+
+#: cartridges/ui/game-details.blp:382
+msgid ""
+"To launch the executable \"{}\", use the command:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"To open the file \"{}\" with the default application, use:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"If the path contains spaces, make sure to wrap it in double quotes!"
+msgstr ""
+"Para lanzar el ejecutable \"{}\", use el comando:\n"
+"\n"
+"<tt>\"{}\"</tt>\n"
+"\n"
+"Para abrir el archivo \"{}\" con la aplicación predeterminada, use:\n"
+"\n"
+"<tt>{} \"{}\"</tt>\n"
+"\n"
+"Si la ruta contiene espacios, ¡asegúrese de entrecomillarla!"
+
+#: cartridges/ui/game-details.blp:475
+msgid "Previous Screenshot"
+msgstr "Captura anterior"
+
+#: cartridges/ui/game-details.blp:490
+msgid "Next Screenshot"
+msgstr "Captura siguiente"
+
+#: cartridges/ui/game-details.blp:544
+msgid "Achievements"
+msgstr "Logros"
+
+#: cartridges/ui/game-details.blp:575
+msgid "Show Fewer"
+msgstr "Mostrar menos"
+
+#: cartridges/ui/game-details.blp:575
+msgid "Show All Achievements"
+msgstr "Mostrar todos los logros"
+
+#: cartridges/ui/game-details.blp:592
+msgid "About This Game"
+msgstr "Acerca de este juego"
+
+#: cartridges/ui/game-details.blp:608
+msgid "Show Less"
+msgstr "Mostrar menos"
+
+#: cartridges/ui/game-details.blp:608
+msgid "Read More"
+msgstr "Leer más"
+
+#: cartridges/ui/game-details.blp:625
+msgid "View on Steam"
+msgstr "Ver en Steam"
+
+#: cartridges/ui/game-item.blp:30
+msgid "Options"
+msgstr "Opciones"
+
+#: cartridges/ui/game_details.py:196
+#, python-brace-format
+msgid "{} in the last two weeks"
+msgstr "{} en las últimas dos semanas"
+
+#: cartridges/ui/game_details.py:222
+#, python-brace-format
+msgid "{} of {} ({}%)"
+msgstr "{} de {} ({} %)"
+
+#: cartridges/ui/game_details.py:232
+msgid "Hidden Achievement"
+msgstr "Logro oculto"
+
+#: cartridges/ui/game_details.py:234
+msgid "Details for this achievement will be revealed once unlocked"
+msgstr "Los detalles de este logro se revelarán cuando lo desbloquees"
+
+#: cartridges/ui/game_details.py:250
+#, python-brace-format
+msgid "Unlocked {}"
+msgstr "Desbloqueado el {}"
+
+#: cartridges/ui/game_details.py:262
+#, python-brace-format
+msgid "{}% of players"
+msgstr "{} % de los jugadores"
+
+#: cartridges/ui/game_details.py:321
+#, python-brace-format
+msgid "Metacritic {}"
+msgstr "Metacritic {}"
+
+#: cartridges/ui/game_details.py:329
+msgid "Release Date"
+msgstr "Fecha de lanzamiento"
+
+#: cartridges/ui/game_details.py:330
+msgid "Developer"
+msgstr "Desarrollador"
+
+#: cartridges/ui/game_details.py:331
+msgid "Publisher"
+msgstr "Editor"
+
+#: cartridges/ui/game_details.py:374
+#, python-brace-format
+msgid "Screenshot {}"
+msgstr "Captura {}"
+
+#: cartridges/ui/game_details.py:483
+msgid "Never"
+msgstr "Nunca"
+
+#: cartridges/ui/game_details.py:485
+msgid "Today"
+msgstr "Hoy"
+
+#: cartridges/ui/game_details.py:487
+msgid "Yesterday"
+msgstr "Ayer"
+
+#: cartridges/ui/game_details.py:491
+msgid "Last Week"
+msgstr "Última semana"
+
+#: cartridges/ui/game_details.py:493
+msgid "This Month"
+msgstr "Este mes"
+
+#: cartridges/ui/game_details.py:495
+msgid "Last Month"
+msgstr "Último mes"
+
+#: cartridges/ui/game_details.py:499
+msgid "Last Year"
+msgstr "Último año"
+
+#: cartridges/ui/game_details.py:507
+msgid "program"
+msgstr "programa"
+
+#: cartridges/ui/game_details.py:508
+msgid "file.txt"
+msgstr "archivo.txt"
+
+#: cartridges/ui/game_details.py:509
+#, python-brace-format
+msgid "/path/to/{}"
+msgstr "/ruta/hasta/{}"
+
+#: cartridges/ui/game_details.py:516
+#, python-brace-format
+msgid "C:\\path\\to\\{}"
+msgstr "C:\\ruta\\hasta\\{}"
+
+#: cartridges/ui/game_details.py:548
+#, python-brace-format
+msgid "{} min"
+msgstr "{} min"
+
+#: cartridges/ui/game_details.py:550
+#, python-brace-format
+msgid "{} h"
+msgstr "{} h"
+
+#: cartridges/ui/games.py:135
+#, python-brace-format
+msgid "{} hidden"
+msgstr "{} oculto"
+
+#: cartridges/ui/games.py:144
+#, python-brace-format
+msgid "{} unhidden"
+msgstr "{} visible"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:6
+#: cartridges/ui/shortcuts-dialog.blp:6
+msgid "General"
+msgstr "General"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:9
+#: cartridges/ui/shortcuts-dialog.blp:9
+msgid "Search"
+msgstr "Buscar"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:14
+#: cartridges/ui/shortcuts-dialog.blp:14 cartridges/ui/window.blp:98
+#: cartridges/ui/window.blp:212
+msgid "Toggle Sidebar"
+msgstr "Conmutar la barra lateral"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:19
+#: cartridges/ui/shortcuts-dialog.blp:19 cartridges/ui/window.blp:225
+msgid "Main Menu"
+msgstr "Menú principal"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:24
+#: cartridges/ui/shortcuts-dialog.blp:24 cartridges/ui/window.blp:229
+msgid "Keyboard Shortcuts"
+msgstr "Atajos del teclado"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:29
+#: cartridges/ui/shortcuts-dialog.blp:29
+msgid "Quit"
+msgstr "Salir"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:35
+#: cartridges/ui/shortcuts-dialog.blp:35
+msgid "Games"
+msgstr "Juegos"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:43
+#: cartridges/ui/shortcuts-dialog.blp:43 cartridges/ui/window.blp:200
+msgid "Show Hidden Games"
+msgstr "Mostrar juegos ocultos"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:48
+#: cartridges/ui/shortcuts-dialog.blp:48
+msgid "Remove Game"
+msgstr "Eliminar juego"
+
+#: cartridges/ui/shortcuts-dialog-mac.blp:57
+#: cartridges/ui/shortcuts-dialog.blp:57
+msgid "Add Collection"
+msgstr "Añadir colección"
+
+#: cartridges/ui/window.blp:24 data/page.kramo.Cartridges.desktop.in:2
+#: data/page.kramo.Cartridges.metainfo.xml.in:10
+msgid "Cartridges"
+msgstr "Cartuchos"
+
+#: cartridges/ui/window.blp:110
+msgid "All Games"
+msgstr "Todos los juegos"
+
+#: cartridges/ui/window.blp:115
+msgid "Sources"
+msgstr "Fuentes"
+
+#: cartridges/ui/window.blp:161
+msgid "Sort & Filter"
+msgstr "Ordenar y filtrar"
+
+#: cartridges/ui/window.blp:166
+msgid "Sort"
+msgstr "Ordenar"
+
+#: cartridges/ui/window.blp:169
+msgid "Last Played"
+msgstr "Último jugado"
+
+#: cartridges/ui/window.blp:175
+msgid "A-Z"
+msgstr "A-Z"
+
+#: cartridges/ui/window.blp:181
+msgid "Z-A"
+msgstr "Z-A"
+
+#: cartridges/ui/window.blp:187
+msgid "Newest"
+msgstr "Más recientes"
+
+#: cartridges/ui/window.blp:193
+msgid "Oldest"
+msgstr "Más antiguos"
+
+#: cartridges/ui/window.blp:230
+msgid "About Cartridges"
+msgstr "Acerca de los cartuchos"
+
+#: cartridges/ui/window.blp:311
+msgid "No Games Found"
+msgstr "No se han encontrado juegos"
+
+#: cartridges/ui/window.blp:312
+msgid "Try a different search"
+msgstr "Pruebe con otra búsqueda"
+
+#: cartridges/ui/window.blp:321
+msgid "No Hidden Games"
+msgstr "No hay juegos ocultos"
+
+#: cartridges/ui/window.blp:322
+msgid "Games you hide will appear here"
+msgstr "Los juegos que oculte aparecerán aquí"
+
+#: cartridges/ui/window.blp:331
+msgid "No Games in {}"
+msgstr "No hay juegos en {}"
+
+#: cartridges/ui/window.blp:340
+msgid "No Games"
+msgstr "No hay juegos"
+
+#: cartridges/ui/window.blp:341
+msgid "Use the + button to add games"
+msgstr "Use el botón + para añadir juegos"
+
+#: cartridges/ui/window.py:127
+msgid "Undo"
+msgstr "Deshacer"
+
+#: data/page.kramo.Cartridges.desktop.in:3
+msgid "Game Launcher"
+msgstr "Lanzador de juegos"
+
+#: data/page.kramo.Cartridges.desktop.in:4
+#: data/page.kramo.Cartridges.metainfo.xml.in:11
+msgid "Launch all your games"
+msgstr "Lance todos sus juegos"
+
+#. Translators: Leave "cartridges" untranslated here.
+#: data/page.kramo.Cartridges.desktop.in:11
+msgid "gaming;games;play;cartridges;launch;launcher;steam;lutris;heroic;epic;bottles;itch;legendary;retroarch;"
+msgstr "gaming;juegos;jugar;cartuchos;cartridges;lanzar;lanzador;steam;lutris;heroic;epic;bottles;itch;legendary;retroarch;"
+
+#: data/page.kramo.Cartridges.metainfo.xml.in:13
+msgid "Cartridges is a simple game launcher for all of your games."
+msgstr "Cartuchos es un lanzador de juegos sencillo para todos sus juegos."
