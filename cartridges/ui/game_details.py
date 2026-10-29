@@ -11,7 +11,7 @@ from gettext import gettext as _
 from typing import Any, cast
 from urllib.parse import quote
 
-from gi.repository import Adw, Gdk, Gio, GObject, Gtk, Pango
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Pango
 
 from cartridges import store
 from cartridges.sources import steam
@@ -25,6 +25,7 @@ from .games import GameActions, GameEditable
 
 
 _ACHIEVEMENTS_SHOWN = 6
+_SCREENSHOT_SECONDS = 4
 
 
 @Gtk.Template(resource_path=f"{PREFIX}/game-details.ui")
@@ -120,6 +121,15 @@ class GameDetails(Adw.NavigationPage):
         )
         self._update_about_lines()
 
+        self._autoplay_id = 0
+        self._hovering_screenshots = False
+        motion = Gtk.EventControllerMotion()
+        motion.connect("enter", lambda *_: self._set_hovering_screenshots(True))
+        motion.connect("leave", lambda *_: self._set_hovering_screenshots(False))
+        cast(Gtk.Widget, self.carousel.props.parent).add_controller(motion)
+        self.carousel.connect("map", lambda *_: self._restart_autoplay())
+        self.carousel.connect("unmap", lambda *_: self._stop_autoplay())
+
     def add(self):
         """Add a new game."""
         self.game = None
@@ -151,6 +161,7 @@ class GameDetails(Adw.NavigationPage):
                 task.cancel()
         self._screenshot_tasks.clear()
         self._full_screenshots.clear()
+        self._stop_autoplay()
 
         self._store_info = None
         self.has_store_info = False
@@ -412,6 +423,8 @@ class GameDetails(Adw.NavigationPage):
         if not self._store_info:
             return
 
+        self._restart_autoplay()
+
         for position, button in enumerate(_children(self.thumbnails_box)):
             if position == index:
                 button.add_css_class("selected")
@@ -430,6 +443,28 @@ class GameDetails(Adw.NavigationPage):
             self._full_screenshots.add(position)
             picture = cast(Gtk.Picture, carousel.get_nth_page(position))
             self._spawn(app, self._load_full_screenshot(screenshots[position].full, picture))
+
+    def _restart_autoplay(self):
+        self._stop_autoplay()
+        if self.carousel.props.n_pages > 1 and not self._hovering_screenshots:
+            self._autoplay_id = GLib.timeout_add_seconds(
+                _SCREENSHOT_SECONDS, self._autoplay
+            )
+
+    def _stop_autoplay(self):
+        if self._autoplay_id:
+            GLib.source_remove(self._autoplay_id)
+            self._autoplay_id = 0
+
+    def _autoplay(self) -> bool:
+        self._autoplay_id = 0
+        # Changing the page restarts the timer
+        self._scroll_screenshots(1)
+        return GLib.SOURCE_REMOVE
+
+    def _set_hovering_screenshots(self, hovering: bool):
+        self._hovering_screenshots = hovering
+        self._restart_autoplay()
 
     def _on_thumbnail_clicked(self, _button, index: int):
         self.carousel.scroll_to(self.carousel.get_nth_page(index), True)
