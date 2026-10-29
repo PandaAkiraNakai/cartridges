@@ -104,9 +104,13 @@
   border-radius: 12px;
 }
 
+/* A border inside the button instead of an outline, which the scrolled
+   window would clip */
 #store-thumbnails > button {
-  padding: 0;
-  border-radius: 6px;
+  padding: 2px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: none;
   opacity: 0.55;
   transition: opacity 200ms;
 }
@@ -117,8 +121,7 @@
 }
 
 #store-thumbnails > button.selected {
-  outline: 2px solid var(--view-fg-color);
-  outline-offset: 2px;
+  border-color: var(--view-fg-color);
 }
 
 #store-thumbnails > button picture {
