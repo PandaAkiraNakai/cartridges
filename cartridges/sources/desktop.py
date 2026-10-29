@@ -12,7 +12,7 @@ from gettext import gettext as _
 from pathlib import Path
 from typing import cast
 
-from gi.repository import GLib, Gtk
+from gi.repository import Gio, GLib, Gtk
 
 from cartridges import cover, games
 from cartridges.games import Game
@@ -85,7 +85,9 @@ def _game_from(path: Path) -> Game:
                 raise ValueError
 
     exe = file.get_string("Desktop Entry", "Exec")
-    if any(exe.startswith(cmd) for cmd in _EXECUTABLE_BLACKLIST):
+    # Launchers create entries such as "steam steam://rungameid/…",
+    # which are duplicates of games imported by their own source
+    if any(cmd in exe for cmd in _EXECUTABLE_BLACKLIST):
         raise ValueError
 
     with suppress(GLib.Error):
@@ -100,15 +102,21 @@ def _game_from(path: Path) -> Game:
     except GLib.Error:
         icon_name = _ICON_FALLBACK
 
-    icon = _icon_theme().lookup_icon(
-        icon_name,
-        fallbacks=(_ICON_FALLBACK,),
-        size=cover.ICON_SIZE,
-        # Sources shouldn't know about the user's display,
-        # so we assume 2x scaling and render the icon at the correct size later.
-        scale=2,
-        direction=Gtk.TextDirection.NONE,
-        flags=Gtk.IconLookupFlags.NONE,
+    # Sources shouldn't know about the user's display,
+    # so we assume 2x scaling and render the icon at the correct size later.
+    icon = (
+        Gtk.IconPaintable.new_for_file(
+            Gio.File.new_for_path(icon_name), cover.ICON_SIZE, 2
+        )
+        if Path(icon_name).is_absolute() and Path(icon_name).is_file()
+        else _icon_theme().lookup_icon(
+            icon_name,
+            fallbacks=(_ICON_FALLBACK,),
+            size=cover.ICON_SIZE,
+            scale=2,
+            direction=Gtk.TextDirection.NONE,
+            flags=Gtk.IconLookupFlags.NONE,
+        )
     )
 
     try:
