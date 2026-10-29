@@ -6,6 +6,8 @@
 import json
 import os
 import subprocess
+import time
+from json import JSONDecodeError
 from pathlib import Path
 from shlex import quote
 from types import UnionType
@@ -40,6 +42,18 @@ PROPERTIES: tuple[_GameProp, ...] = (
 )
 
 _SPEC_VERSION = 2.0
+
+# Properties of games from external sources that are owned by the user,
+# so they are kept across reimports instead of being overwritten
+_RESTORED_PROPERTIES = frozenset((
+    "added",
+    "executable",
+    "hidden",
+    "last_played",
+    "name",
+    "developer",
+    "removed",
+))
 
 
 class Game(Gio.SimpleActionGroup):
@@ -89,6 +103,9 @@ class Game(Gio.SimpleActionGroup):
 
     def play(self):
         """Run the executable command in a shell."""
+        self.last_played = int(time.time())
+        self.save()
+
         subprocess.Popen(  # noqa: S602
             format_executable(self.executable),
             cwd=Path.home(),
@@ -105,6 +122,33 @@ class Game(Gio.SimpleActionGroup):
         path = Path(f"{GAMES_DIR / self.game_id}.json")
         with path.open("w", encoding="utf-8") as f:
             json.dump(properties, f, indent=4, sort_keys=True)
+
+
+def restore(game: Game):
+    """Restore the state of `game` saved to disk, if any."""
+    try:
+        with Path(f"{GAMES_DIR / game.game_id}.json").open(encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, JSONDecodeError, UnicodeDecodeError):
+        return
+
+    if not isinstance(data, dict):
+        return
+
+    try:
+        saved = Game.from_data(data)
+    except TypeError:
+        return
+
+    for name in _RESTORED_PROPERTIES:
+        if data.get(name) is None:
+            continue
+
+        value = saved.get_property(name.replace("_", "-"))
+        if name == "last_played":
+            value = max(value, game.last_played)
+
+        setattr(game, name, value)
 
 
 def format_executable(executable: str) -> str:

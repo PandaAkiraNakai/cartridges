@@ -40,7 +40,7 @@ class GameActions(Gio.SimpleActionGroup):
         self.add_action_entries((
             ("add", lambda *_: add()),
             ("edit", lambda *_: edit(self.game)),
-            ("play", lambda *_: self.game.play()),
+            ("play", lambda *_: play(self.game)),
             ("hide", lambda *_: hide(self.game)),
             ("unhide", lambda *_: unhide(self.game)),
             ("remove", lambda *_: remove(self.game)),
@@ -102,6 +102,7 @@ class GameEditable(GObject.Object):
             self.game.name = self.name
             sorter.changed(Gtk.SorterChange.DIFFERENT)
         self.game.developer = self.developer
+        self.game.save()
 
 
 def add():
@@ -120,31 +121,43 @@ def edit(game: Game):
     window.details.edit()
 
 
+def play(game: Game):
+    """Play `game` and update its position if sorting by last played."""
+    game.play()
+    if STATE_SETTINGS.get_string("sort-mode") == "last_played":
+        sorter.changed(Gtk.SorterChange.DIFFERENT)
+
+
 def hide(game: Game):
     """Hide `game` and notify the user with a toast."""
-    game.hidden = True
+    _set_saved(game, "hidden", True)
     _window().send_toast(
         _("{} hidden").format(game.name),
-        undo=lambda: setattr(game, "hidden", False),
+        undo=lambda: _set_saved(game, "hidden", False),
     )
 
 
 def unhide(game: Game):
     """Unhide `game` and notify the user with a toast."""
-    game.hidden = False
+    _set_saved(game, "hidden", False)
     _window().send_toast(
         _("{} unhidden").format(game.name),
-        undo=lambda: setattr(game, "hidden", True),
+        undo=lambda: _set_saved(game, "hidden", True),
     )
 
 
 def remove(game: Game):
     """Remove `game` and notify the user with a toast."""
-    game.removed = True
+    _set_saved(game, "removed", True)
     _window().send_toast(
         _("{} removed").format(game.name),
-        undo=lambda: setattr(game, "removed", False),
+        undo=lambda: _set_saved(game, "removed", False),
     )
+
+
+def _set_saved(game: Game, name: str, value: Any):
+    setattr(game, name, value)
+    game.save()
 
 
 def _window() -> "Window":
@@ -153,6 +166,10 @@ def _window() -> "Window":
 
 
 def _sort(game1: Game, game2: Game) -> int:
+    # Desktop entries are mostly launchers and tools, so keep them after games
+    if launcher_cmp := _is_launcher(game1) - _is_launcher(game2):
+        return launcher_cmp
+
     prop, invert = _SORT_MODES[STATE_SETTINGS.get_string("sort-mode")]
     a = (game2 if invert else game1).get_property(prop)
     b = (game1 if invert else game2).get_property(prop)
@@ -162,6 +179,10 @@ def _sort(game1: Game, game2: Game) -> int:
         if isinstance(a, str)
         else ((a > b) - (a < b)) or _name_cmp(game1.name, game2.name)
     )
+
+
+def _is_launcher(game: Game) -> bool:
+    return game.source == "desktop"
 
 
 def _name_cmp(a: str, b: str) -> int:
@@ -195,4 +216,10 @@ model = Gtk.SortListModel(
         watch_items=True,
     ),
     sorter=sorter,
+)
+
+# Launchers are only shown in their own source and collections, not in "All Games"
+library_model = Gtk.FilterListModel(
+    model=model,
+    filter=Gtk.CustomFilter.new(lambda game: not _is_launcher(game)),
 )

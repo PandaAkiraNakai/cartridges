@@ -31,6 +31,11 @@ def get_games() -> Generator[Game]:
             continue
 
         base = COVERS_DIR / game.game_id
+        if game.removed:
+            for removed in path, Path(f"{base}.gif"), Path(f"{base}.tiff"):
+                removed.unlink(missing_ok=True)
+            continue
+
         game.cover = cover.at_path(f"{base}.gif") or cover.at_path(f"{base}.tiff")
         yield game
 

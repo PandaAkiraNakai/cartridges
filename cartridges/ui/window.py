@@ -84,7 +84,7 @@ class Window(Adw.ApplicationWindow):
         STATE_SETTINGS.bind("is-maximized", self, "maximized", flags)
         STATE_SETTINGS.bind("show-sidebar", self.split_view, "show-sidebar", flags)
 
-        self.sources.bind_model(sources.model, SourceSidebarItem)
+        self.sources.bind_model(sources.sidebar_model, SourceSidebarItem)
         self.collections.bind_model(collections.model, CollectionSidebarItem)
 
         self.add_action(STATE_SETTINGS.create_action("show-sidebar"))
@@ -113,7 +113,7 @@ class Window(Adw.ApplicationWindow):
             lambda model, *_: None if model else self._model_emptied(),
             after=False,
         )
-        self.model = games.model
+        self.model = games.library_model
 
         self._history: dict[Adw.Toast, _UndoFunc] = {}
 
@@ -136,7 +136,7 @@ class Window(Adw.ApplicationWindow):
         self.sidebar.props.selected = 0
 
     def _model_emptied(self):
-        self.model = games.model
+        self.model = games.library_model
         self.sidebar.props.selected = 0
 
     @Gtk.Template.Callback()
@@ -161,7 +161,7 @@ class Window(Adw.ApplicationWindow):
                 self.model = games.model
             case _:
                 self.collection = None
-                self.model = games.model
+                self.model = games.library_model
 
         if item is not self.new_collection_item:
             self._selected_sidebar_item = index

@@ -42,3 +42,9 @@ model = Gtk.SortListModel(
         expression=Gtk.PropertyExpression.new(Source, None, "name")
     ),
 )
+
+# Desktop entries are launchers, which get their own collection instead
+sidebar_model = Gtk.FilterListModel(
+    model=model,
+    filter=Gtk.CustomFilter.new(lambda source: source.id != "desktop"),
+)
